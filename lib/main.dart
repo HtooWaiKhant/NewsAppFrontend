@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/category.dart';
 import 'api/categories_api.dart';
+import 'screens/category_posts.dart';
 
 void main() {
   runApp(NewsApp());
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _drawCategoriesList( List<Category> categories) {
+  Widget _drawCategoriesList( List<Category> categories, BuildContext context) {
     return ListView.builder(
       itemCount: categories.length,
       itemBuilder: (BuildContext context, int position) {
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           onTap: (){
-            
+            Navigator.push(context, route)
           },
         );
       },
