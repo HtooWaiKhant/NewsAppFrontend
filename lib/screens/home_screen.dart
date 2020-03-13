@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/api/posts_api.dart';
 import 'package:frontend/models/post.dart';
+import 'package:frontend/shared_ui/list_posts.dart';
 import 'package:http/http.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -79,25 +80,46 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: <Widget>[
         _slider(postsWithImages),
+        _postsList(posts),
       ],
     );
   }
 
   Widget _slider(List<Post> posts){
     return Container(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: MediaQuery.of(context).size.height * 0.25,
       child: PageView.builder(
         itemCount: posts.length,
         itemBuilder: (BuildContext context, int position){
-          return Stack(
-            children: <Widget>[
-              Image(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  posts[position].images[0].image_url
+          return InkWell(
+            onTap: (){
+              // TODO: Go to the single post screen
+            },
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      posts[position].images[0].image_url
+                    ),
+                  ),
                 ),
-              )
-            ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      margin: EdgeInsets.only(bottom: 8),
+                      color: Colors.grey.withAlpha(100),
+                      child: Text(posts[position].post_title,
+                      style: TextStyle(
+                        fontSize: 18
+                      ),),
+                    ),
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -116,6 +138,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       child: Center(
         child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  _postsList(List<Post> posts) {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: (BuildContext context, int position){
+            return PostCard(posts[position]);
+          },
+        ),
       ),
     );
   }

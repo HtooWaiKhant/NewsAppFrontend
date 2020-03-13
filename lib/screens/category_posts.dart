@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/api/categories_api.dart';
 import 'package:frontend/models/post.dart';
+import 'package:frontend/shared_ui/list_posts.dart';
 import 'package:http/http.dart';
 
 class CategoryPosts extends StatefulWidget {
@@ -84,17 +85,7 @@ Widget _drawPostsList(List<Post> posts) {
     child: ListView.builder(
       itemCount: posts.length,
       itemBuilder: (BuildContext context, int position) {
-      return InkWell(
-        child: Card(
-          child: Container(
-             padding: EdgeInsets.all(16),
-            child: Text(posts[position].post_title),
-          ),
-        ),
-        onTap: (){
-//          Navigator.push(context, MaterialPageRoute())
-        },
-      );
+      return PostCard(posts[position]);
     },),
   );
 }
