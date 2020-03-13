@@ -1,6 +1,6 @@
 class PostImage{
   String image_id, image_description, image_url, post_id;
-  bool is_featured;
+  String is_featured;
 
   PostImage(this.image_id, this.image_description, this.image_url, this.post_id,
       this.is_featured);
@@ -10,7 +10,7 @@ class PostImage{
     this.image_description = jsonObject['image_description'].toString();
     this.image_url = jsonObject['image_url'].toString();
     this.post_id = jsonObject['post_id'].toString();
-    this.is_featured = jsonObject['is_featured'];
+    this.is_featured = jsonObject['is_featured'].toString();
   }
 
 }

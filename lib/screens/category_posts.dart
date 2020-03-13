@@ -27,6 +27,7 @@ class _CategoryPostsState extends State<CategoryPosts> {
         child: FutureBuilder(
         future: categoriesApi.fetchPostsForCategory(widget.categoryID),
         builder: ( BuildContext context , AsyncSnapshot<List<Post>> snapshot){
+          print(snapshot);
           switch(snapshot.connectionState){
             case ConnectionState.active:
             //STILL WORKING
@@ -47,7 +48,7 @@ class _CategoryPostsState extends State<CategoryPosts> {
             }
 
             if(snapshot.hasData){
-            return _drawPostsList(snapshot.data, context);
+            return _drawPostsList(snapshot.data);
             }
             break;
           }
@@ -91,7 +92,7 @@ Widget _drawPostsList(List<Post> posts) {
           ),
         ),
         onTap: (){
-
+//          Navigator.push(context, MaterialPageRoute())
         },
       );
     },),
