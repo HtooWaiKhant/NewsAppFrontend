@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/api/posts_api.dart';
 import 'package:frontend/models/post.dart';
+import 'package:http/http.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -72,11 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _drawHomeScreen(List<Post> posts){
     for(Post post in posts){
       if(post.images.length > 0){
-        print('ga');
         postsWithImages.add(post);
       }
     }
-    print(postsWithImages.length);
     return Column(
       children: <Widget>[
         _slider(postsWithImages),
@@ -93,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return Stack(
             children: <Widget>[
               Image(
+                fit: BoxFit.cover,
                 image: NetworkImage(
                   posts[position].images[0].image_url
                 ),
